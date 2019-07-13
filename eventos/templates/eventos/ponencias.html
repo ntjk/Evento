@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+        <title>Ponencias</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
+    </head>
+    <body>
+        <table>
+		    <tr>
+		        <th>Evento</th>
+		        <th>Nombre</th>
+		        <th>Fecha</th>
+		        <th>Duración</th>
+		    </tr>
+		    {% for ponencia in ponencias %}
+		    <tr> 
+		        <td>{{ ponencia.evento_id }}</td>
+		        <td>{{ ponencia.nombre_ponencia }}</td>
+		        <td>{{ ponencia.fecha_ponencia }}</td>
+		        <td>{{ ponencia.duracion }}</td>
+		    </tr>
+		    {% endfor %}
+		</table>
+    </body>
+</html>
+

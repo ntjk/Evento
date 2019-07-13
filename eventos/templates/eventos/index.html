@@ -1,0 +1,10 @@
+{% load static %}
+{% if lista_eventos %}
+	<ul>
+	{% for evento in lista_eventos %}
+		<li>{{evento.nombre_evento }}</li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No hay eventos por ahora</p>
+{% endif %}
