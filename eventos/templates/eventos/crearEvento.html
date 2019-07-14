@@ -1,0 +1,12 @@
+{% extends 'eventos/menu.html' %}
+{% block content %}
+    <h1>Crear evento</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <form action="{% url 'eventos:crearEvento' %}" method="post">
+    {% csrf_token %}
+	  First name:<br>
+	  <input type="text" name="firstname">
+	  <br>
+	  <input type="submit" value="Submit">
+	</form>
+{% endblock %}

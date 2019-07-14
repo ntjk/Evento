@@ -1,10 +1,30 @@
-{% load static %}
-{% if lista_eventos %}
-	<ul>
-	{% for evento in lista_eventos %}
-		<li>{{evento.nombre_evento }}</li>
-	{% endfor %}
-	</ul>
-{% else %}
-	<p>No hay eventos por ahora</p>
-{% endif %}
+{% extends 'eventos/menu.html' %}
+{% block content %}
+<h1>Eventos</h1>
+    	{% if eventos %}
+        <table>
+		    <tr>
+		        <th>Nombre</th>
+		        <th>Fechas</th>
+		        <th>Ponencias</th>
+		        <th>Asistentes</th>
+		    </tr>
+		    {% for e in eventos %}
+		    <tr>
+		        <td>{{ e.nombre_evento }}</td>
+		        <td><a href="{% url 'eventos:fechas' e.id %}">
+		        <button type="button">Ver fechas</button>
+		        </a></td>
+		        <td><a href="{% url 'eventos:ponencias' e.id %}">
+		        <button type="button">Ver ponencias</button>
+		        </a></td>
+		        <td><a href="{% url 'eventos:asistentes' e.id %}">
+		        <button type="button">Ver asistentes</button>
+		        </a></td>
+		    </tr>
+		    {% endfor %}
+		</table>
+		{% else %}
+		<p>No hay eventos por ahora</p>
+		{% endif %}
+{% endblock %}

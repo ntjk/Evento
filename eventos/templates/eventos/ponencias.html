@@ -1,27 +1,29 @@
-{% load static %}
-<!doctype html>
-<html>
-    <head>
-        <title>Ponencias</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
-    </head>
-    <body>
+{% extends 'eventos/menu.html' %}
+{% block content %}
+    <h1>Ponencias</h1>
+    {% if ponencias %}
         <table>
 		    <tr>
 		        <th>Evento</th>
 		        <th>Nombre</th>
 		        <th>Fecha</th>
 		        <th>Duración</th>
+		        <th>Ponente</th>
 		    </tr>
 		    {% for ponencia in ponencias %}
 		    <tr> 
-		        <td>{{ ponencia.evento_id }}</td>
+		        <td>{{ ponencia.evento }}</td>
 		        <td>{{ ponencia.nombre_ponencia }}</td>
 		        <td>{{ ponencia.fecha_ponencia }}</td>
 		        <td>{{ ponencia.duracion }}</td>
+		        <td><a href="{% url 'eventos:ponentes' ponencia.id %}">
+		        <button type="button">Ver ponente</button>
+		        </a></td>
 		    </tr>
 		    {% endfor %}
 		</table>
-    </body>
-</html>
+		{% else %}
+		<p>No hay ponencias por ahora</p>
+	{% endif %}
+{% endblock %}
 

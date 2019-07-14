@@ -1,0 +1,19 @@
+{% extends 'eventos/menu.html' %}
+{% block content %}
+
+<h1>Fechas del evento:</h1>
+  {% if fechas %}
+  <table>
+	<tr>
+	  <th>Nombre</th>
+	</tr>
+	{% for a in fechas %}
+	<tr> 
+	  <td>{{ a.fecha_evento }}</td>
+	</tr>
+	{% endfor %}
+  </table>
+{% else %}
+<p>No hay fechas por ahora</p>
+{% endif %}
+{% endblock %}

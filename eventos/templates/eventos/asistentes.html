@@ -1,0 +1,27 @@
+{% extends 'eventos/menu.html' %}
+{% block content %}
+
+<h1>Asistentes</h1>
+  {% if asistentes %}
+  <table>
+	<tr>
+	  <th>Nombre</th>
+	  <th>Apellido</th>
+	  <th>Telefono</th>
+	  <th>Email</th>
+	  <th>Organizacion</th>
+	</tr>
+	{% for a in asistentes %}
+	<tr> 
+	  <td>{{ a.nombre_ponente }}</td>
+	  <td>{{ a.apellido_ponente}}</td>
+	  <td>{{ a.telefono }}</td>
+	  <td>{{ a.email }}</td>
+	  <td>{{ a.organizacion_asistente}}</td>
+	</tr>
+	{% endfor %}
+  </table>
+{% else %}
+<p>No hay asistentes por ahora</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'eventos/menu.html' %}
+{% block content %}
+
+<h1>Ponentes</h1>
+  {% if ponentes %}
+  <table>
+	<tr>
+	  <th>Nombre</th>
+	  <th>Apellido</th>
+	  <th>Cargo</th>
+	  <th>Organizacion</th>
+	</tr>
+	{% for p in ponentes %}
+	<tr> 
+	  <td>{{ p.nombre_ponente }}</td>
+	  <td>{{ p.apellido_ponente}}</td>
+	  <td>{{ p.cargo }}</td>
+	  <td>{{ p.organizacion_ponente}}</td>
+	</tr>
+	{% endfor %}
+  </table>
+{% else %}
+<p>No hay ponentes por ahora</p>
+{% endif %}
+{% endblock %}

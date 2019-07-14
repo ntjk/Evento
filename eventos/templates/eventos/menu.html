@@ -1,0 +1,16 @@
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+        <title>Menu</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
+    </head>
+    <body>
+        <span><a href="{% url 'eventos:index' %}">Eventos</a></span>
+        <span><a href="{% url 'eventos:ponencias' 0 %}">Ponencias</a></span>
+        <span><a href="{% url 'eventos:ponentes' 0 %}">Ponentes</a></span>
+        <span><a href="{% url 'eventos:crearEvento' %}">Crear evento</a></span>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
