@@ -1,0 +1,24 @@
+{% extends 'eventos/menu.html' %}
+{% block content %}
+    <h1>Agregar asistente</h1>
+    <form action="{% url 'eventos:agregarAsistente' %}" method="post">
+    {% csrf_token %}
+      Evento:<br>
+      <select type="int" name = "evento">
+        {% for e in eventos %}
+  			<option value="{{e.id}}">{{e.nombre_evento}}</option>
+		{% endfor %}
+	  </select><br><br>
+	  Nombre:<br>
+	  <input type="text" name="nombre_asistente"><br><br>
+	  Apellido:<br>
+	  <input type="text" name="apellido_asistente"><br><br>
+	  Telefono<br>
+	  <input type="text" name="telefono"><br><br>
+	  Email<br>
+	  <input type="text" name="email"><br><br>
+	  Organización a la que pertenece<br>
+	  <input type="text" name="organizacion_asistente"><br><br>
+	  <input type="submit" value="Submit">
+	</form>
+{% endblock %}

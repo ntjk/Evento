@@ -1,0 +1,16 @@
+{% extends 'eventos/menu.html' %}
+{% block content %}
+    <h1>Agregar fecha</h1>
+    <form action="{% url 'eventos:agregarFecha' %}" method="post">
+    {% csrf_token %}
+      Evento:<br>
+      <select type="int" name = "evento">
+        {% for p in eventos %}
+  			<option value="{{p.id}}">{{p.nombre_evento}}</option>
+		{% endfor %}
+	  </select><br><br>
+	  Fecha:<br>
+	  <input type="date" name="fecha_evento"><br><br>
+	  <input type="submit" value="Submit">
+	</form>
+{% endblock %}

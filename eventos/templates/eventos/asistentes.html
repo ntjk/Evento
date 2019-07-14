@@ -5,6 +5,7 @@
   {% if asistentes %}
   <table>
 	<tr>
+	  <th>Evento</th>
 	  <th>Nombre</th>
 	  <th>Apellido</th>
 	  <th>Telefono</th>
@@ -12,9 +13,10 @@
 	  <th>Organizacion</th>
 	</tr>
 	{% for a in asistentes %}
-	<tr> 
-	  <td>{{ a.nombre_ponente }}</td>
-	  <td>{{ a.apellido_ponente}}</td>
+	<tr>
+	  <td>{{ a.evento }}</td>
+	  <td>{{ a.nombre_asistente }}</td>
+	  <td>{{ a.apellido_asistente}}</td>
 	  <td>{{ a.telefono }}</td>
 	  <td>{{ a.email }}</td>
 	  <td>{{ a.organizacion_asistente}}</td>

@@ -6,10 +6,17 @@
         <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
     </head>
     <body>
+        <div>
         <span><a href="{% url 'eventos:index' %}">Eventos</a></span>
         <span><a href="{% url 'eventos:ponencias' 0 %}">Ponencias</a></span>
         <span><a href="{% url 'eventos:ponentes' 0 %}">Ponentes</a></span>
         <span><a href="{% url 'eventos:crearEvento' %}">Crear evento</a></span>
+        <span><a href="{% url 'eventos:crearPonencia' %}">Crear ponencia</a></span>
+        <span><a href="{% url 'eventos:agregarPonente' %}">Agregar ponente</a></span>
+        <span><a href="{% url 'eventos:agregarAsistente' %}">Agregar asistente</a></span>
+        <span><a href="{% url 'eventos:agregarFecha' %}">Agregar fecha</a></span>
+        <span><a href="">Crear gerente</a></span>
+        </div>
         {% block content %}
         {% endblock %}
     </body>

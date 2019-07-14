@@ -1,0 +1,25 @@
+{% extends 'eventos/menu.html' %}
+{% block content %}
+    <h1>Crear ponencia</h1>
+    <form action="{% url 'eventos:crearPonencia' %}" method="post">
+    {% csrf_token %}
+      Evento:<br>
+      <select name = "evento">
+        {% for e in eventos %}
+  			<option value="{{e.id}}">{{e.nombre_evento}}</option>
+		{% endfor %}
+	  </select><br><br>
+	  Nombre:<br>
+	  <input type="text" name="nombre_ponencia"><br><br>
+	  Fecha<br>
+      <select name = "fecha_ponencia">
+        {% for e in fechas %}
+  			<option value="{{e.fecha_evento}}}">{{e.fecha_evento}}</option>
+		{% endfor %}
+	  </select><br><br>
+	  Duracion<br>
+	  Colocarla en este formato: hh:mm:ss<br>
+	  <input type="text" name="duracion"><br><br>
+	  <input type="submit" value="Submit">
+	</form>
+{% endblock %}

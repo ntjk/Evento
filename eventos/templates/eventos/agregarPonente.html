@@ -1,0 +1,22 @@
+{% extends 'eventos/menu.html' %}
+{% block content %}
+    <h1>Agregar ponente</h1>
+    <form action="{% url 'eventos:agregarPonente' %}" method="post">
+    {% csrf_token %}
+      Ponencia:<br>
+      <select type="int" name = "ponencia">
+        {% for p in ponencias %}
+  			<option value="{{p.id}}">{{p.nombre_ponencia}}</option>
+		{% endfor %}
+	  </select><br><br>
+	  Nombre:<br>
+	  <input type="text" name="nombre_ponente"><br><br>
+	  Apellido:<br>
+	  <input type="text" name="apellido_ponente"><br><br>
+	  Cargo<br>
+	  <input type="text" name="cargo"><br><br>
+	  Organización a la que pertenece<br>
+	  <input type="text" name="organizacion_ponente"><br><br>
+	  <input type="submit" value="Submit">
+	</form>
+{% endblock %}
