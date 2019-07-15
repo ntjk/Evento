@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Crear agente</title>
+        <title>Login</title>
         <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
     </head>
     <body>
@@ -10,11 +10,11 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
+                <legend class="border-bottom mb-4">Log in</legend>
                 {{ form.as_p }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                <button class="btn btn-outline-info" type="submit">Log in</button>
             </div>
         </form>
     </div>

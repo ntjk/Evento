@@ -1,11 +1,5 @@
-{% load static %}
-<!doctype html>
-<html>
-    <head>
-        <title>Crear agente</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
-    </head>
-    <body>
+{% extends 'eventos/menu.html' %}
+{% block content %}
     	<div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -18,5 +12,4 @@
             </div>
         </form>
     </div>
-    </body>
-</html>
+{% endblock %}

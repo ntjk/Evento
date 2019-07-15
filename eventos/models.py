@@ -1,9 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+'''Hereda de AbstractUser para utilizar todo lo que tiene el usuario por defecto de Django.
+Campos listos, compatibilidad con aplicaciones de Django, etc. Aqui lo extendemos para 
+poder agregarle los campos user_type y phone. Este modelo englobará los tres perfiles
+que se piden: administrador, gerente y agente'''
+class User(AbstractUser):
+	#user_type es el atributo que nos permite saber el rol del usuario.
+    user_type = models.CharField(max_length=25)
+    phone = models.CharField(max_length=25)
+
+# Modelo que permite realizar la auditoria
+class Registro_usuario(models.Model):
+	fecha_registro = models.DateField()
+	hora_registro = models.TimeField()
+	id_creador = models.IntegerField()
+	usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+
+'''Los siguientes modelos representan la información de interés de la aplicación
+Se utiliza def __str__ en todos para que dicho objeto tenga su representacion en string'''
 class Evento(models.Model):
 	nombre_evento = models.CharField('Nombre', max_length=100)
-	#asistentes = models.ManyToManyField(Asistente)
 	def __str__(self):
 		return self.nombre_evento
 		
@@ -40,7 +57,3 @@ class Ponente(models.Model):
 	organizacion_ponente = models.CharField('Organización a la que pertenece', max_length=65)
 	def __str__(self):
 		return self.nombre_ponente+' '+self.apellido_ponente
-
-class User(AbstractUser):
-    user_type = models.CharField(max_length=25)
-    phone = models.CharField(max_length=25)

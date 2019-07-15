@@ -1,0 +1,25 @@
+{% extends 'eventos/menu.html' %}
+{% block content %}
+    <h1>Auditoria de cuentas registradas</h1>
+    {% if auditoria %}
+        <table>
+		    <tr>
+		        <th>Usuario</th>
+		        <th>Fecha</th>
+		        <th>Hora</th>
+		        <th>Creador</th>
+		    </tr>
+		    {% for a in auditoria %}
+		    <tr>
+		        <td>{{ a.usuario }}</td>
+		        <td>{{ a.fecha_registro }}</td>
+		        <td>{{ a.hora_registro }}</td>
+		        <td>{{ a.id_creador }}</td>
+		    </tr>
+		    {% endfor %}
+		</table>
+		{% else %}
+		<p>No hay registro de cuentas por ahora</p>
+	{% endif %}
+{% endblock %}
+

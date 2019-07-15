@@ -1,0 +1,16 @@
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+        <title>Logout</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
+    </head>
+    <body>
+    	<h2>You have been logged out</h2>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a href="{% url 'login' %}">Log In Again</a>
+            </small>
+        </div>
+    </body>
+</html>

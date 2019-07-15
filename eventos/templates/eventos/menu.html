@@ -2,22 +2,39 @@
 <!doctype html>
 <html>
     <head>
-        <title>Menu</title>
+        <title>Eventos App</title>
         <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
     </head>
     <body>
         <div>
-        <span><a href="{% url 'eventos:index' %}">Eventos</a></span>
-        <span><a href="{% url 'eventos:ponencias' 0 %}">Ponencias</a></span>
-        <span><a href="{% url 'eventos:ponentes' 0 %}">Ponentes</a></span>
-        <span><a href="{% url 'eventos:crearEvento' %}">Crear evento</a></span>
-        <span><a href="{% url 'eventos:crearPonencia' %}">Crear ponencia</a></span>
-        <span><a href="{% url 'eventos:agregarPonente' %}">Agregar ponente</a></span>
-        <span><a href="{% url 'eventos:agregarAsistente' %}">Agregar asistente</a></span>
-        <span><a href="{% url 'eventos:agregarFecha' %}">Agregar fecha</a></span>
-        <span><a href="">Crear gerente</a></span>
-        <span><a href="{% url 'eventos:crearAgente' %}">Crear agente</a></span>
-        </div>
+        {% if user.is_authenticated and user.user_type == "Agente" %}
+            <span><a href="{% url 'eventos:index' %}">Eventos</a></span>
+            <span><a href="{% url 'eventos:ponencias' 0 %}">Ponencias</a></span>
+            <span><a href="{% url 'eventos:ponentes' 0 %}">Ponentes</a></span>    
+            <span><a href="{% url 'eventos:agregarAsistente' %}">Agregar asistente</a></span>
+            <span><a href="{% url 'logout' %}"><button type="button">Cerrar sesión</button></a></span>
+        {% elif user.is_authenticated and user.user_type == "Gerente" %}
+            <span><a href="{% url 'eventos:index' %}">Eventos</a></span>
+            <span><a href="{% url 'eventos:ponencias' 0 %}">Ponencias</a></span>
+            <span><a href="{% url 'eventos:ponentes' 0 %}">Ponentes</a></span>
+            <span><a href="{% url 'eventos:crearEvento' %}">Crear evento</a></span>
+            <span><a href="{% url 'eventos:crearPonencia' %}">Crear ponencia</a></span>
+            <span><a href="{% url 'eventos:agregarPonente' %}">Agregar ponente</a></span>
+            <span><a href="{% url 'eventos:agregarFecha' %}">Agregar fecha</a></span>
+            <span><a href="{% url 'logout' %}"><button type="button">Cerrar sesión</button></a></span>
+        {% elif user.is_authenticated and user.user_type == "Administrador" or user.is_superuser %}   
+            <span><a href="{% url 'eventos:index' %}">Eventos</a></span>
+            <span><a href="{% url 'eventos:ponencias' 0 %}">Ponencias</a></span>
+            <span><a href="{% url 'eventos:ponentes' 0 %}">Ponentes</a></span> 
+            <span><a href="{% url 'eventos:crearAdministrador' %}">Crear administrador</a></span>
+            <span><a href="{% url 'eventos:crearGerente' %}">Crear gerente</a></span>
+            <span><a href="{% url 'eventos:crearAgente' %}">Crear agente</a></span>
+            <span><a href="{% url 'eventos:auditoria' %}">Auditoria</a></span>
+            <span><a href="{% url 'logout' %}"><button type="button">Cerrar sesión</button></a></span> 
+        {% else %}
+            <span><a href="{% url 'login' %}"><button type="button">Iniciar sesión</button></a></span>
+        {% endif %}
+        </div><br>
         {% if messages %}
                     {% for message in messages %}
                       <div class="alert alert-{{ message.tags }}">
