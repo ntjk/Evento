@@ -11,8 +11,8 @@ from .forms import AgenteRegisterForm, GerenteRegisterForm, AdminRegisterForm
 from django.contrib.auth.decorators import login_required
 import datetime
 
-'''Notas general: @login_required hace que la funcion sobre la que se coloca, requiera que el usuario
-	haya iniciado sesion para que pueda suceder. Si no, lo redirige a la ruta indicada en
+'''Notas general: @login_required hace que la funcion sobre la que se coloca, requiera que el 
+usuario haya iniciado sesion para que pueda suceder. Si no, lo redirige a la ruta indicada en
 	el argumento login_url'''
 
 #VISTAS QUE MUESTRAN TABLAS INFORMATIVAS SOBRE LOS EVENTOS: FECHAS, PONENCIAS, PONENETES Y ASISTENTES
@@ -20,6 +20,8 @@ import datetime
 def eventos(request):
 	return render(request, 'eventos/index.html', {'eventos': Evento.objects.all()}) 
 
+''' Se coloca evento_id con el objetivo de que se aproveche esta vista para mostrar las ponencias 
+tanto de un evento especifico como en general'''
 @login_required(login_url='login')
 def ponencias(request, evento_id):
 	if evento_id == 0:
@@ -45,6 +47,7 @@ def asistentes(request, evento_id):
 	else:
 		return render(request, 'eventos/asistentes.html', {'asistentes': Asistente.objects.filter(evento_id=evento_id)})
 
+# Muestra los registros de usuarios hechos
 @login_required(login_url='login')
 def auditoria(request):
 	if request.user.user_type == 'Administrador':
@@ -52,7 +55,9 @@ def auditoria(request):
 	else:
 		return HttpResponseRedirect(reverse('eventos:index'))
 
-#VISTAS PARA AGREGAR INFORMACION EN LA BD SOBRE LOS EVENTOS: FECHAS, PONENCIAS, PONENETES Y ASISTENTES
+'''VISTAS PARA AGREGAR INFORMACION EN LA BD SOBRE LOS EVENTOS: FECHAS, PONENCIAS, PONENETES Y ASISTENTES
+	Las siguientes vistas dependen del rol que tenga ese usuario, lo cual se validad con
+	request.user.user_type'''
 @login_required(login_url='login')
 def crearEvento(request):
 	if request.user.user_type == 'Gerente':
@@ -80,7 +85,7 @@ def crearPonencia(request):
 			print(evento)
 		except (KeyError, Evento.DoesNotExist):
 			return render(request, 'eventos/crearPonencia.html', {
-				'error_message': "No ingreso nombre del evento",
+				'error_message': "No ingreso nombre de la ponencia",
 				'eventos': Evento.objects.all(),
 				'ponentes': Ponente.objects.all()
 				})
@@ -126,7 +131,7 @@ def agregarAsistente(request):
 			evento = request.POST['evento']
 		except (KeyError, Asistente.DoesNotExist):
 			return render(request, 'eventos/agregarAsistente.html', {
-				'error_message': "No ingreso datos del ponente",
+				'error_message': "No ingreso datos del asistente",
 				'eventos': Evento.objects.all(),
 				})
 		else:
@@ -154,7 +159,9 @@ def agregarFecha(request):
 	else:
 		return HttpResponseRedirect(reverse('eventos:fechas', args=(evento,)))
 
-# Funcion que guarda el registro sobre la creacion de usuarios, se llama cada vez que se cree uno
+''' Funcion que guarda el registro sobre la creacion de usuarios, 
+se llama cada vez que se cree uno, no es una funcion que lleva una vista asociada, 
+simplemente es para no repetir el codigo en las funciones que agregan cuentas de usuario'''
 def auditar(request):
 	print ('auditar')
 	ultimo = User.objects.order_by('-id')[0]
@@ -168,6 +175,7 @@ def auditar(request):
 def crearAgente(request):
 	if request.user.user_type == 'Administrador':
 		if request.method == 'POST':
+			# AgenteRegisterForm esta definida en eventos/forms.py
 			form = AgenteRegisterForm(request.POST)
 			if form.is_valid():
 				form.save()
@@ -185,6 +193,7 @@ def crearAgente(request):
 def crearGerente(request):
 	if request.user.user_type == 'Administrador':
 		if request.method == 'POST':
+			# GerenteRegisterForm esta definida en eventos/forms.py
 			form = GerenteRegisterForm(request.POST)
 			if form.is_valid():
 				form.save()
@@ -202,6 +211,7 @@ def crearGerente(request):
 def crearAdministrador(request):
 	if request.user.user_type == 'Administrador':
 		if request.method == 'POST':
+			# AdminRegisterForm esta definida en eventos/forms.py
 			form = AdminRegisterForm(request.POST)
 			if form.is_valid():
 				form.save()
