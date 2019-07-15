@@ -59,6 +59,7 @@ def crearPonencia(request):
 	try:
 		nombre = request.POST['nombre_ponencia']
 		fecha = request.POST['fecha_ponencia']
+		hora = request.POST['hora']
 		duracion = request.POST['duracion']
 		evento = request.POST['evento']
 		print(evento)
@@ -69,7 +70,7 @@ def crearPonencia(request):
 			'ponentes': Ponente.objects.all()
 			})
 	else:
-		nueva_ponencia = Ponencia(nombre_ponencia=nombre, fecha_ponencia=fecha, duracion=duracion,
+		nueva_ponencia = Ponencia(nombre_ponencia=nombre, fecha_ponencia=fecha, hora=hora, duracion=duracion,
 			evento_id = evento)
 		nueva_ponencia.save()
 	return HttpResponseRedirect(reverse('eventos:ponencias', args=(0,)))

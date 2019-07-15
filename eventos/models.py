@@ -26,7 +26,8 @@ class Fecha(models.Model):
 class Ponencia(models.Model):
 	evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
 	nombre_ponencia = models.CharField('Nombre', max_length=100)
-	fecha_ponencia = models.DateTimeField('Fecha')
+	fecha_ponencia = models.DateField('Fecha')
+	hora = models.TimeField()
 	duracion = models.CharField(max_length=9)
 	def __str__(self):
 		return self.nombre_ponencia

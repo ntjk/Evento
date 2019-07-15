@@ -7,6 +7,7 @@
 		        <th>Evento</th>
 		        <th>Nombre</th>
 		        <th>Fecha</th>
+		        <th>Hora</th>
 		        <th>Duración</th>
 		        <th>Ponente</th>
 		    </tr>
@@ -15,6 +16,7 @@
 		        <td>{{ ponencia.evento }}</td>
 		        <td>{{ ponencia.nombre_ponencia }}</td>
 		        <td>{{ ponencia.fecha_ponencia }}</td>
+		        <td>{{ ponencia.hora }}</td>
 		        <td>{{ ponencia.duracion }}</td>
 		        <td><a href="{% url 'eventos:ponentes' ponencia.id %}">
 		        <button type="button">Ver ponente</button>
