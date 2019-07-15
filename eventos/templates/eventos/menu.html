@@ -17,7 +17,12 @@
         <span><a href="{% url 'eventos:agregarFecha' %}">Agregar fecha</a></span>
         <span><a href="">Crear gerente</a></span>
         <span><a href="{% url 'eventos:crearAgente' %}">Crear agente</a></span>
-        </div>
+        {% if user.is_authenticated %}
+            <span><a href="{% url 'logout' %}"><button type="button">Cerrar sesión</button></a></span>
+        {% else %}
+            <span><a href="{% url 'login' %}"><button type="button">Iniciar sesión</button></a></span>
+        {% endif %}
+        </div><br>
         {% if messages %}
                     {% for message in messages %}
                       <div class="alert alert-{{ message.tags }}">
