@@ -16,7 +16,15 @@
         <span><a href="{% url 'eventos:agregarAsistente' %}">Agregar asistente</a></span>
         <span><a href="{% url 'eventos:agregarFecha' %}">Agregar fecha</a></span>
         <span><a href="">Crear gerente</a></span>
+        <span><a href="{% url 'eventos:crearAgente' %}">Crear agente</a></span>
         </div>
+        {% if messages %}
+                    {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+                  {% endif %}
         {% block content %}
         {% endblock %}
     </body>

@@ -1,22 +1,20 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
-from .models import Evento, Ponencia, Ponente, Fecha, Asistente
+from .models import Evento, Ponencia, Ponente, Fecha, Asistente, User
 from django.utils import timezone
-
+from django.contrib.auth import login, authenticate
+#from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from .forms import UserRegisterForm
 
 '''class IndexView(generic.ListView):
 	template_name = 'eventos/index.html'
 	context_object_name = 'lista_eventos'
 	def get_queryset(self):
 		return Evento.objects.order_by('-id'))'''
-	
-'''def ponentes(request):
-    return render(request, 'eventos/ponentes.html', {'ponentes': Ponente.objects.all()})
-    def get_queryset(self):
-    	return Ponente.objects.filter()'''
 
 def eventos(request):
 	return render(request, 'eventos/index.html', {'eventos': Evento.objects.all()}) 
@@ -68,8 +66,7 @@ def crearPonencia(request):
 		return render(request, 'eventos/crearPonencia.html', {
 			'error_message': "No ingreso nombre del evento",
 			'eventos': Evento.objects.all(),
-			'ponentes': Ponente.objects.all(),
-			'fechas': Fecha.objects.all()
+			'ponentes': Ponente.objects.all()
 			})
 	else:
 		nueva_ponencia = Ponencia(nombre_ponencia=nombre, fecha_ponencia=fecha, duracion=duracion,
@@ -126,3 +123,30 @@ def agregarFecha(request):
 		nueva_fecha = Fecha(fecha_evento = fecha, evento_id=evento)
 		nueva_fecha.save()
 	return HttpResponseRedirect(reverse('eventos:fechas', args=(evento,)))
+
+'''def crearAgente(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+    return render(request, 'eventos/crearAgente.html', {'form': form})'''
+
+def crearAgente(request):
+	if request.method == 'POST':
+		form = UserRegisterForm(request.POST)
+		if form.is_valid():
+			print('valido')
+			form.save()
+			username = form.cleaned_data.get('username')
+			messages.success(request, f'Account created for {username}!')
+			return redirect(reverse('eventos:index'))
+	else:
+		form = UserRegisterForm()
+	return render(request, 'eventos/crearAgente.html', {'form' : form})

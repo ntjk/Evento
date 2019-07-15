@@ -11,12 +11,8 @@
 	  </select><br><br>
 	  Nombre:<br>
 	  <input type="text" name="nombre_ponencia"><br><br>
-	  Fecha<br>
-      <select name = "fecha_ponencia">
-        {% for e in fechas %}
-  			<option value="{{e.fecha_evento}}}">{{e.fecha_evento}}</option>
-		{% endfor %}
-	  </select><br><br>
+	  Fecha:<br>
+	  <input type="date" name="fecha_ponencia"><br><br>
 	  Duracion<br>
 	  Colocarla en este formato: hh:mm:ss<br>
 	  <input type="text" name="duracion"><br><br>

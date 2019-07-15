@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 class Evento(models.Model):
 	nombre_evento = models.CharField('Nombre', max_length=100)
@@ -38,3 +39,7 @@ class Ponente(models.Model):
 	organizacion_ponente = models.CharField('Organización a la que pertenece', max_length=65)
 	def __str__(self):
 		return self.nombre_ponente+' '+self.apellido_ponente
+
+class User(AbstractUser):
+    user_type = models.CharField(max_length=25)
+    phone = models.CharField(max_length=25)
