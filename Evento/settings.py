@@ -120,6 +120,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# Link para que sepa que está la carpeta static para buscar archivos por alli
 STATIC_URL = '/static/'
 
+# Lo utiliza el view decorator login_required. 
+# Esta es la direccion a la que redirigen si no esta loggeado el usuario
 LOGIN_REDIRECT_URL = 'eventos:index'
